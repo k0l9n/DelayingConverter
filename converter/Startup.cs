@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using converter.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,7 @@ namespace converter
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseServiceStatus(() => Task.FromResult(true));
             app.UseMvc();
         }
     }
