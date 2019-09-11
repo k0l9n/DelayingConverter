@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace converter.Middleware
+namespace converterApi.Middleware
 {
     public class ServiceStatusMiddleware
     {
@@ -120,7 +118,7 @@ namespace converter.Middleware
     /// </summary>
     public static class ServiceStatusMiddlewareExtensions
     {
-        public static IApplicationBuilder UseServiceStatus(
+        public static IApplicationBuilder UseServiceMonitoring(
           this IApplicationBuilder app,
           Func<Task<bool>> serviceStatusCheck)
         {

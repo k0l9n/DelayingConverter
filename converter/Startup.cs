@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using converter.Middleware;
+﻿using System.Threading.Tasks;
+using converterApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Nancy.Owin;
+using Serilog;
+using Serilog.Events;
 
-namespace converter
+namespace converterApi
 {
     public class Startup
     {
@@ -35,8 +33,20 @@ namespace converter
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseServiceStatus(() => Task.FromResult(true));
-            app.UseMvc();
+            var log = ConfigureLogger();
+
+            app.UseServiceMonitoring(() => Task.FromResult(true));
+            app.UseLoggingMiddleware(log);
+            app.UseOwin(func =>
+                func.UseNancy());
+        }
+
+        private ILogger ConfigureLogger()
+        {
+            return new LoggerConfiguration().Enrich.FromLogContext()
+                .WriteTo
+                .File("logs/log.txt", LogEventLevel.Verbose,"{NewLine}{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
+                .CreateLogger();
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Converter";
+}
+
+<h2>Converter</h2>
+
+<div class="start-page">
+    <div class="form">
+        <form class="userdata-form">
+            <input type="text" placeholder="text" />
+            <button>GO</button>
+        </form>
+        <div class="result">
+            <p id="result-data"></p>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('.userdata-form button').click(function () {
+                var data = $(".userdata-form input")[0].value;
+
+                var content = {
+                    userData: data
+                };
+
+                debugger;
+                console.log('zdarova');
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        $("#result-data")[0].value = xhttp.responseText;
+                        $(".result")[0].style.display = "block";
+                    }
+                }
+                xhttp.open('GET', 'Home/GetConvertedData?userInput='+data, true);
+                xhttp.setRequestHeader('Content-type', 'text/plain');
+                xhttp.send(null);
+
+            });
+        });
+    
+    </script>
+}

@@ -1,0 +1,12 @@
+
+01:05:33 [Information] Request: /api/values,GET,Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.FrameRequestHeaders
+
+01:05:34 [Information] Response: Code:404,L: executed in 913ms
+
+01:06:23 [Information] Request: /start,POST,Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.FrameRequestHeaders
+
+01:06:27 [Information] Response: Code:200,L: executed in 3681ms
+
+01:06:37 [Information] Request: /start,POST,Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.FrameRequestHeaders
+
+01:06:38 [Information] Response: Code:200,L: executed in 1889ms
